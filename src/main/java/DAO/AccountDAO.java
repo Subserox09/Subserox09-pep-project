@@ -32,15 +32,16 @@ public class AccountDAO {
         return null;
     }
 
-    public Account getAccountById(int id){
+    public Account getAccountDetails(String username,String password){
         Connection connection = ConnectionUtil.getConnection();
         try {
             //Write SQL logic here
-            String sql = "select * from account where account_id = ?;";
+            String sql = "select * from account where username = ? and password=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             //write preparedStatement's setInt method here.
-            preparedStatement.setInt(1,id);
+            preparedStatement.setString(1,username);
+            preparedStatement.setString(2,password);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
                 Account account = new Account(rs.getInt("account_id"),
