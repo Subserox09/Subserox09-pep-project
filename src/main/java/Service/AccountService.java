@@ -13,6 +13,9 @@ public class AccountService {
     }
 
     public Account addAccount(Account account) {
+        if(accountDAO.getAccountById(account.getAccount_id()) != null){
+            return null;
+        }
         return accountDAO.insertAccount(account);
     }
 }
