@@ -74,6 +74,7 @@ public class SocialMediaController {
         Account account = mapper.readValue(ctx.body(), Account.class);
         Account searchForAccount = accountService.getAccount(account);
         if(searchForAccount!=null){
+            ctx.json(mapper.writeValueAsString(searchForAccount));
                 ctx.status(200);           
         }else{
             ctx.status(401);
