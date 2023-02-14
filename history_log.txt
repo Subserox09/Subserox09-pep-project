@@ -1,7 +1,7 @@
-commit 1ccb8814ce6066211e14ab8e955af951cba3313e
+commit 67fd42bbbb0496205302d6bb990ab39e1083207a
 Author: Subserox09 <adekunle.kukoyi@outlook.com>
-Date:   Tue Feb 14 22:41:23 2023 +0000
+Date:   Tue Feb 14 22:48:08 2023 +0000
 
-    postLoginEmptyTest
+    postRegisterThenPostLogin
 
- 5 files changed, 52 insertions(+), 82 deletions(-)
+ 3 files changed, 40 insertions(+), 134 deletions(-)
