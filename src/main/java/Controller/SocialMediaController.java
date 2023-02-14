@@ -60,7 +60,7 @@ public class SocialMediaController {
             }
 
             if(account.getPassword().length() < 4){
-
+                ctx.status(400);
             }
             
         }else{
