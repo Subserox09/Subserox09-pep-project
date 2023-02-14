@@ -1,7 +1,7 @@
-commit f3e5788bfa5ccbb3db61ba2436bd63d194392b5c
+commit 7ae79c187a112abd7144f6044adb179ed8a8dc2a
 Author: Subserox09 <adekunle.kukoyi@outlook.com>
-Date:   Tue Feb 14 19:27:34 2023 +0000
+Date:   Tue Feb 14 20:46:28 2023 +0000
 
-    working on the register part
+    register2
 
- 5 files changed, 127 insertions(+), 2 deletions(-)
+ 5 files changed, 133 insertions(+), 7 deletions(-)

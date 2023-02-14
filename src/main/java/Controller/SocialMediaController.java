@@ -1,10 +1,10 @@
 package Controller;
 
 import Model.Account;
-import Model.Message;
+//import Model.Message;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import Service.AccountService;
-import Service.MessageService;
+//import Service.MessageService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,11 +17,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class SocialMediaController {
     AccountService accountService;
 
-    MessageService messageService;
+    //MessageService messageService;
 
     public SocialMediaController(){
         this.accountService = new AccountService();
-        this.messageService = new MessageService();
+        //this.messageService = new MessageService();
     }
 
     /**
@@ -31,7 +31,7 @@ public class SocialMediaController {
      */
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        app.get("/messages", this::getAllMessagesHandler);
+        //app.get("/messages", this::getAllMessagesHandler);
         app.post("/register", this::postRegisterHandler);
 
         return app;
@@ -51,8 +51,18 @@ public class SocialMediaController {
         Account account = mapper.readValue(ctx.body(), Account.class);
         Account addedAccount = accountService.addAccount(account);
         if(addedAccount!=null){
-            ctx.json(mapper.writeValueAsString(addedAccount));
-            ctx.status(200);
+            if(!account.getUsername().equals("")){
+                ctx.json(mapper.writeValueAsString(addedAccount));
+                ctx.status(200);
+            }else{
+                ctx.status(400);
+
+            }
+
+            if(account.getPassword().length() < 4){
+
+            }
+            
         }else{
             ctx.status(400);
         }
