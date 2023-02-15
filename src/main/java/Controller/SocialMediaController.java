@@ -32,11 +32,13 @@ public class SocialMediaController {
      */
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        app.get("/messages", this::getAllMessagesHandler);
-        app.get("/messages/{first}", this::getSpecificMessageHandler);
-        app.post("/messages", this::postMessageHandler);
         app.post("/register", this::postRegisterHandler);
         app.post("/login", this::postLoginHandler);
+        app.get("/accounts/{first}/messages",this::getMessageByAccountIDHandler)
+        app.get("/messages", this::getAllMessagesHandler);
+        app.get("/messages/{first}", this::getMessageByMessageIDHandler);
+        app.post("/messages", this::postMessageHandler);
+        
 
         return app;
     }
@@ -68,13 +70,28 @@ public class SocialMediaController {
     public void getAllMessagesHandler(Context context) {
         List<Message> messages = messageService.getAllMessages();
         context.json(messages);
-        //context.status(200);
+        
     }
 
-    public void getSpecificMessageHandler(Context context){
+    public void getMessageByAccountIDHandler(Context context){
+        String id = context.pathParam("first");
+        int accountId = Integer.ParseInt(id);
+        List<Message> messages = messageService.getMessageByAccountId(accountId);
+
+        if(messages != null){
+            context.json(messages);
+            context.status(200);
+        }else{
+            context.json(messages);
+            context.status(400);
+            
+        }
+    }
+
+    public void getMessageByMessageIDHandler(Context context){
         String id = context.pathParam("first");
         int messageId = Integer.parseInt(id);
-        Message message = messageService.getSpecificMessage(messageId);
+        Message message = messageService.getMessageByMessageID(messageId);
 
         if(message != null){
             context.json(message);

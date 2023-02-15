@@ -52,10 +52,10 @@ public class MessageDAO {
         return null;
     }
 
-    public Message getMessageById(int id){
+    public Message getMessageByMessageId(int id){
         Connection connection = ConnectionUtil.getConnection();
         try {
-//          
+          
             String sql = "select * from message where message_id = ?;" ;
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -74,4 +74,29 @@ public class MessageDAO {
         }
         return null;
     }
+
+    public List<Message> getMessageByAccountId(int id){
+        Connection connection = ConnectionUtil.getConnection();
+        List<Message> messages = new ArrayList<>();
+        try {
+          
+            String sql = "select * from message where posted_by = ?;" ;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            //write preparedStatement's setString method here.
+            
+            preparedStatement.setInt(1,id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()){
+                Message message = new Message(rs.getInt("message_id"),rs.getInt("posted_by"),
+                rs.getString("message_text"),rs.getLong("time_posted_epoch"));
+                messages.add(message);
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return messages;
+    }
+
 }

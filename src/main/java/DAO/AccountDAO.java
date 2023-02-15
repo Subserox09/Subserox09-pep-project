@@ -42,6 +42,7 @@ public class AccountDAO {
             //write preparedStatement's setInt method here.
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,password);
+            
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
                 Account account = new Account(rs.getInt("account_id"),

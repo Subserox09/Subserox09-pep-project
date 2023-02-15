@@ -19,10 +19,18 @@ public class MessageService {
         return messageDAO.insertMessage(message);
     }
 
-    public Message getSpecificMessage(int message_id){
-        if(messageDAO.getMessageById(message_id) == null){
+    public Message getMessageaByMessageID(int message_id){
+        if(messageDAO.getMessageByMessageId(message_id) == null){
             return null;
         }
-        return messageDAO.getMessageById(message_id);
+        return messageDAO.getMessageByMessageId(message_id);
+    }
+
+    public List<Message> getMessageByAccountID(int message_id){
+        if(messageDAO.getMessageByAccountId(message_id)== null){
+            return null;
+        }
+        return messageDAO.getMessageByAccountId(message_id);
+
     }
 }
