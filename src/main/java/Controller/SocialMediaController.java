@@ -49,8 +49,11 @@ public class SocialMediaController {
         ObjectMapper mapper = new ObjectMapper();
         Message message = mapper.readValue(ctx.body(), Message.class);
         Message addedMessage = messageService.addMessage(message);
-        if(addedMessage == null){
-         ctx.status(400);
+        if(addedMessage != null){
+         ctx.json(mapper.writeValueAsString(addedMessage));
+         ctx.status(200);
+        }else{
+            ctx.status(400);
         }
     }
 

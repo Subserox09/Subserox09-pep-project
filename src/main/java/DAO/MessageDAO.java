@@ -31,14 +31,14 @@ public class MessageDAO {
         Connection connection = ConnectionUtil.getConnection();
         try {
 //          
-            String sql = "insert into message(message_id,posted_by,message_text,time_posted_epoch) values (?,?,?,?);" ;
+            String sql = "insert into message(posted_by,message_text,time_posted_epoch) values (?,?,?);" ;
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             //write preparedStatement's setString method here.
-            preparedStatement.setInt(1, message.getMessage_id());
-            preparedStatement.setInt(2,message.getPosted_by());
-            preparedStatement.setString(3,message.getMessage_text());
-            preparedStatement.setLong(4, message.getTime_posted_epoch());
+            
+            preparedStatement.setInt(1,message.getPosted_by());
+            preparedStatement.setString(2,message.getMessage_text());
+            preparedStatement.setLong(3, message.getTime_posted_epoch());
             preparedStatement.executeUpdate();
 
             ResultSet pkeyResultSet = preparedStatement.getGeneratedKeys();
