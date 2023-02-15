@@ -50,8 +50,13 @@ public class SocialMediaController {
         Message message = mapper.readValue(ctx.body(), Message.class);
         Message addedMessage = messageService.addMessage(message);
         if(addedMessage != null){
-         ctx.json(mapper.writeValueAsString(addedMessage));
-         ctx.status(200);
+            if(addedMessage.getMessage_text().length() > 255){
+                ctx.status(400);
+            }else{
+                ctx.json(mapper.writeValueAsString(addedMessage));
+                ctx.status(200);
+            }
+         
         }else{
             ctx.status(400);
         }
