@@ -52,9 +52,11 @@ public class SocialMediaController {
         if(addedMessage != null){
             if(addedMessage.getMessage_text().length() > 255){
                 ctx.status(400);
-            }else{
+            }else if(addedMessage.getMessage_text().length() <= 255 && !(addedMessage.getMessage_text().equals(""))){
                 ctx.json(mapper.writeValueAsString(addedMessage));
                 ctx.status(200);
+            }else{
+                ctx.status(400);
             }
          
         }else{
