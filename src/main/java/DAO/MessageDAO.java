@@ -75,6 +75,30 @@ public class MessageDAO {
         return null;
     }
 
+    public Message updateMessageByMessageId(int id,Message message){
+        Connection connection = ConnectionUtil.getConnection();
+        
+        try {
+          
+            String sql = "update message set message_text = ? where message_id =?;" ;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            //write preparedStatement's setString method here.
+            preparedStatement.setString(1,message.getMessage_text());
+            preparedStatement.setInt(2,id);
+
+            preparedStatement.executeUpdate();
+
+
+            
+            return getMessageByMessageId(id);
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     public Message deleteMessageByMessageId(int id){
         Connection connection = ConnectionUtil.getConnection();
         try {
