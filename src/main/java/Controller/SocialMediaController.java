@@ -34,7 +34,7 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         app.post("/register", this::postRegisterHandler);
         app.post("/login", this::postLoginHandler);
-        app.get("/accounts/{first}/messages",this::getMessageByAccountIDHandler)
+        app.get("/accounts/{first}/messages",this::getMessageByAccountIDHandler);
         app.get("/messages", this::getAllMessagesHandler);
         app.get("/messages/{first}", this::getMessageByMessageIDHandler);
         app.post("/messages", this::postMessageHandler);
@@ -75,16 +75,12 @@ public class SocialMediaController {
 
     public void getMessageByAccountIDHandler(Context context){
         String id = context.pathParam("first");
-        int accountId = Integer.ParseInt(id);
-        List<Message> messages = messageService.getMessageByAccountId(accountId);
+        int accountId = Integer.parseInt(id);
+        List<Message> messages = messageService.getMessageByAccountID(accountId);
 
         if(messages != null){
             context.json(messages);
             context.status(200);
-        }else{
-            context.json(messages);
-            context.status(400);
-            
         }
     }
 
