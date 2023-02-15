@@ -18,4 +18,11 @@ public class MessageService {
     public Message addMessage(Message message){
         return messageDAO.insertMessage(message);
     }
+
+    public Message getSpecificMessage(int message_id){
+        if(messageDAO.getMessageById(message_id) == null){
+            return null;
+        }
+        return messageDAO.getMessageById(message_id);
+    }
 }

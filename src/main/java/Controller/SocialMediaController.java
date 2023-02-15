@@ -33,6 +33,7 @@ public class SocialMediaController {
     public Javalin startAPI() {
         Javalin app = Javalin.create();
         app.get("/messages", this::getAllMessagesHandler);
+        app.get("/messages/{first}", this::getSpecificMessageHandler);
         app.post("/messages", this::postMessageHandler);
         app.post("/register", this::postRegisterHandler);
         app.post("/login", this::postLoginHandler);
@@ -68,6 +69,19 @@ public class SocialMediaController {
         List<Message> messages = messageService.getAllMessages();
         context.json(messages);
         //context.status(200);
+    }
+
+    public void getSpecificMessageHandler(Context context){
+        String id = context.pathParam("first");
+        int messageId = Integer.parseInt(id);
+        Message message = messageService.getSpecificMessage(messageId);
+
+        if(message != null){
+            context.json(message);
+            context.status(200);
+        }else{
+            context.status(400);
+        }
     }
 
     private void postRegisterHandler(Context ctx) throws JsonProcessingException {

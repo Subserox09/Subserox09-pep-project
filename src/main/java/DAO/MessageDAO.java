@@ -62,10 +62,8 @@ public class MessageDAO {
             //write preparedStatement's setString method here.
             
             preparedStatement.setInt(1,id);
-            
-            preparedStatement.executeUpdate();
 
-            ResultSet rs = preparedStatement.getGeneratedKeys();
+            ResultSet rs = preparedStatement.executeQuery();
             if(rs.next()){
                 Message message = new Message(rs.getInt("message_id"),rs.getInt("posted_by"),
                 rs.getString("message_text"),rs.getLong("time_posted_epoch"));
