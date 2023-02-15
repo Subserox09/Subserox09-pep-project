@@ -38,15 +38,22 @@ public class SocialMediaController {
         app.get("/messages", this::getAllMessagesHandler);
         app.get("/messages/{first}", this::getMessageByMessageIDHandler);
         app.post("/messages", this::postMessageHandler);
+        app.delete("/messages/{message_id}", this::deleteMessageHandler);
         
 
         return app;
     }
 
-    /**
-     * This is an example handler for an example endpoint.
-     * @param context The Javalin Context object manages information about both the HTTP request and response.
-     */
+    public void deleteMessageHandler(Context ctx) throws JsonProcessingException{
+        String messageID = ctx.pathParam("message_id");
+        int message_id = Integer.parseInt(messageID);
+        Message message = messageService.deleteMessageByID(message_id);
+         
+        if(message != null){
+            ctx.json(message);
+        }
+        
+    }
 
     public void postMessageHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper mapper = new ObjectMapper();

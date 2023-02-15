@@ -64,11 +64,30 @@ public class MessageDAO {
             preparedStatement.setInt(1,id);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if(rs.next()){
+            while(rs.next()){
                 Message message = new Message(rs.getInt("message_id"),rs.getInt("posted_by"),
                 rs.getString("message_text"),rs.getLong("time_posted_epoch"));
                 return message;
             }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public Message deleteMessageByMessageId(int id){
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+          
+            String sql = "delete from message where message_id = ?;" ;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            //write preparedStatement's setString method here.
+            
+            preparedStatement.setInt(1,id);
+
+            preparedStatement.executeQuery();  
+            
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
