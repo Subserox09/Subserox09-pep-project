@@ -81,6 +81,8 @@ public class SocialMediaController {
         if(messages != null){
             context.json(messages);
             context.status(200);
+        }else{
+            context.status(400);
         }
     }
 

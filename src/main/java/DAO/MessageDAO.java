@@ -88,7 +88,7 @@ public class MessageDAO {
             preparedStatement.setInt(1,id);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if(rs.next()){
+            while(rs.next()){
                 Message message = new Message(rs.getInt("message_id"),rs.getInt("posted_by"),
                 rs.getString("message_text"),rs.getLong("time_posted_epoch"));
                 messages.add(message);
