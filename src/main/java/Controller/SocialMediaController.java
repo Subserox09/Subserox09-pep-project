@@ -151,8 +151,11 @@ public class SocialMediaController {
         Message message = messageService.updateMessagebyID(message_id, message_text);
         System.out.println(message);
         if(message != null){
-            ctx.json(message);
-            ctx.status(200);
+            if(message.getMessage_text().length() <= 255){
+                ctx.json(message);
+                ctx.status(200);
+            }
+            
         }else{
             ctx.status(400);
         }
