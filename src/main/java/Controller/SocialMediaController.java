@@ -1,13 +1,14 @@
 package Controller;
 
 import Model.Account;
-//import Model.Message;
+import Model.Message;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import Service.AccountService;
-//import Service.MessageService;
+import Service.MessageService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 
 /**
  * TODO: You will need to write your own endpoints and handlers for your controller. The endpoints you will need can be
@@ -17,11 +18,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class SocialMediaController {
     AccountService accountService;
 
-    //MessageService messageService;
+    MessageService messageService;
 
     public SocialMediaController(){
         this.accountService = new AccountService();
-        //this.messageService = new MessageService();
+        this.messageService = new MessageService();
     }
 
     /**
@@ -31,7 +32,7 @@ public class SocialMediaController {
      */
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        //app.get("/messages", this::getAllMessagesHandler);
+        app.get("/messages", this::getAllMessagesHandler);
         app.post("/register", this::postRegisterHandler);
         app.post("/login", this::postLoginHandler);
 
@@ -42,10 +43,11 @@ public class SocialMediaController {
      * This is an example handler for an example endpoint.
      * @param context The Javalin Context object manages information about both the HTTP request and response.
      */
-   /*  private void getAllMessagesHandler(Context context) {
+    public void getAllMessagesHandler(Context context) {
         List<Message> messages = messageService.getAllMessages();
-        context.json("sample text");
-    }*/
+        context.json(messages);
+        //context.status(200);
+    }
 
     private void postRegisterHandler(Context ctx) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

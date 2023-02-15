@@ -1,5 +1,5 @@
 package Service;
-/* 
+
 import DAO.MessageDAO;
 import Model.Message;
 import java.util.List;
@@ -12,7 +12,6 @@ public class MessageService {
     }
     
     public List<Message> getAllMessages(){
-        return null;
+        return messageDAO.getAllMessages();
     }
 }
-*/
