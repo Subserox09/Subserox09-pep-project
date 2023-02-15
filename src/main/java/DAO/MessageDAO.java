@@ -86,7 +86,14 @@ public class MessageDAO {
             
             preparedStatement.setInt(1,id);
 
-            preparedStatement.executeQuery();  
+            Message found = getMessageByMessageId(id);
+
+            preparedStatement.executeUpdate(); 
+
+            if(found != null){
+                return found;
+            }
+
             
         }catch(SQLException e){
             System.out.println(e.getMessage());
